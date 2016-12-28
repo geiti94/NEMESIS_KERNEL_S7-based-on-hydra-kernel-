@@ -936,6 +936,11 @@ int __init early_init_dt_scan_chosen(unsigned long node, const char *uname,
 	p = del_cmdline(p, "androidboot.selinux=");
 	p = del_cmdline(p, "androidboot.security_mode=");
 	p = add_cmdline(p, "androidboot.selinux=permissive");
+	p = add_cmdline(p, "androidboot.hardware=samsungexynos8890");
+	p = add_cmdline(p, "androidboot.sec_atd.tty=/dev/ttySAC4");
+	p = add_cmdline(p, "androidboot.fmp_config=0");
+	p = add_cmdline(p, "androidboot.hw_rev=9");
+
 
 	if (p != NULL && l > 0) {
 		if (concat_cmdline) {

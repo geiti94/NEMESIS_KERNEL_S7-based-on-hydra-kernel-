@@ -57,7 +57,7 @@ void kbasep_add_waiting_soft_job(struct kbase_jd_atom *katom)
 	spin_unlock_irqrestore(&kctx->waiting_soft_jobs_lock, lflags);
 }
 
-static int kbasep_read_soft_event_status(
+int kbasep_read_soft_event_status(
 		struct kbase_context *kctx, u64 evt, unsigned char *status)
 {
 	unsigned char *mapped_evt;
@@ -74,14 +74,14 @@ static int kbasep_read_soft_event_status(
 	return 0;
 }
 
-static int kbasep_write_soft_event_status(
+int kbasep_write_soft_event_status(
 		struct kbase_context *kctx, u64 evt, unsigned char new_status)
 {
 	unsigned char *mapped_evt;
 	struct kbase_vmap_struct map;
 
 	if ((new_status != BASE_JD_SOFT_EVENT_SET) &&
-		(new_status != BASE_JD_SOFT_EVENT_RESET))
+	    (new_status != BASE_JD_SOFT_EVENT_RESET))
 		return -EINVAL;
 
 	mapped_evt = kbase_vmap(kctx, evt, sizeof(*mapped_evt), &map);
@@ -472,8 +472,8 @@ static void kbasep_soft_event_update_locked(struct kbase_jd_atom *katom,
  * Return: 0 on success, a negative error code on failure.
  */
 int kbase_soft_event_update(struct kbase_context *kctx,
-		u64 event,
-		unsigned char new_status)
+			     u64 event,
+			     unsigned char new_status)
 {
 	int err = 0;
 
